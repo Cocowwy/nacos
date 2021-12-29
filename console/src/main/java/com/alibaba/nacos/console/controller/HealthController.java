@@ -51,6 +51,7 @@ public class HealthController {
     }
     
     /**
+     * 检测 Nacos是否在存活
      * Whether the Nacos is in broken states or not, and cannot recover except by being restarted.
      *
      * @return HTTP code equal to 200 indicates that Nacos is in right states. HTTP code equal to 500 indicates that
@@ -62,6 +63,7 @@ public class HealthController {
     }
     
     /**
+     * 是否准备好接收请求
      * Ready to receive the request or not.
      *
      * @return HTTP code equal to 200 indicates that Nacos is ready. HTTP code equal to 500 indicates that Nacos is not
@@ -69,7 +71,9 @@ public class HealthController {
      */
     @GetMapping("/readiness")
     public ResponseEntity<String> readiness(HttpServletRequest request) {
+        // config_info 直接返回的 true
         boolean isConfigReadiness = isConfigReadiness();
+        // maming
         boolean isNamingReadiness = isNamingReadiness(request);
         
         if (isConfigReadiness && isNamingReadiness) {

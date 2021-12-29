@@ -162,6 +162,7 @@ public class OperatorController {
     }
     
     /**
+     * 获取指标信息
      * Get metrics information.
      *
      * @param request request
