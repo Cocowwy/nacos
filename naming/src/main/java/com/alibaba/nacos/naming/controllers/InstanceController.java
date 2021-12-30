@@ -68,12 +68,13 @@ import java.util.Map;
 import static com.alibaba.nacos.naming.misc.UtilsAndCommons.DEFAULT_CLUSTER_NAME;
 
 /**
+ * 实例控制器
  * Instance operation controller.
  *
  * @author nkorange
  */
 @RestController
-@RequestMapping(UtilsAndCommons.NACOS_NAMING_CONTEXT + UtilsAndCommons.NACOS_NAMING_INSTANCE_CONTEXT)
+@RequestMapping(UtilsAndCommons.NACOS_NAMING_CONTEXT + UtilsAndCommons.NACOS_NAMING_INSTANCE_CONTEXT) // /v1/ns/instance
 public class InstanceController {
     
     @Autowired
@@ -95,7 +96,7 @@ public class InstanceController {
     
     /**
      * Register new instance.
-     *
+     * 服务注册
      * @param request http request
      * @return 'ok' if success
      * @throws Exception any error during register
@@ -109,7 +110,15 @@ public class InstanceController {
                 .optional(request, CommonParams.NAMESPACE_ID, Constants.DEFAULT_NAMESPACE_ID);
         final String serviceName = WebUtils.required(request, CommonParams.SERVICE_NAME);
         NamingUtils.checkServiceNameFormat(serviceName);
-        
+
+        // 生成的实例属性
+        // Instance{
+        // instanceId='192.168.1.10#10001#DEFAULT#DEFAULT_GROUP@@server1',
+        // ip='192.168.1.10',
+        // port=10001, weight=1.0, healthy=true, enabled=true,
+        // ephemeral=true, clusterName='DEFAULT', serviceName='DEFAULT_GROUP@@server1',
+        // metadata={preserved.register.source=SPRING_CLOUD}}
+
         final Instance instance = HttpRequestInstanceBuilder.newBuilder()
                 .setDefaultInstanceEphemeral(switchDomain.isDefaultInstanceEphemeral()).setRequest(request).build();
         

@@ -73,7 +73,7 @@ public class HealthController {
     public ResponseEntity<String> readiness(HttpServletRequest request) {
         // config_info 直接返回的 true
         boolean isConfigReadiness = isConfigReadiness();
-        // maming
+        // maming ready
         boolean isNamingReadiness = isNamingReadiness(request);
         
         if (isConfigReadiness && isNamingReadiness) {
