@@ -53,6 +53,7 @@ public abstract class Subscriber<T extends Event> {
     }
     
     /**
+     * 是否忽略过期事件。
      * Whether to ignore expired events.
      *
      * @return default value is {@link Boolean#FALSE}

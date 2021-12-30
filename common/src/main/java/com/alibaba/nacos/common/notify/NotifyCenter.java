@@ -37,6 +37,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import static com.alibaba.nacos.api.exception.NacosException.SERVER_ERROR;
 
 /**
+ * 统一事件通知中心
  * Unified Event Notify Center.
  *
  * @author <a href="mailto:liaochuntao@live.com">liaochuntao</a>
@@ -61,6 +62,7 @@ public class NotifyCenter {
     private static Class<? extends EventPublisher> clazz;
     
     /**
+     * 发布者管理容器
      * Publisher management container.
      */
     private final Map<String, EventPublisher> publisherMap = new ConcurrentHashMap<>(16);
@@ -270,6 +272,7 @@ public class NotifyCenter {
     }
     
     /**
+     * 发布者发布事件
      * Request publisher publish event Publishers load lazily, calling publisher. Start () only when the event is
      * actually published.
      *
@@ -291,6 +294,7 @@ public class NotifyCenter {
      * @param event     event instance.
      */
     private static boolean publishEvent(final Class<? extends Event> eventType, final Event event) {
+        // 判断当前发布的事件是否是慢事件 序列号sequence为0
         if (ClassUtils.isAssignableFrom(SlowEvent.class, eventType)) {
             return INSTANCE.sharePublisher.publish(event);
         }

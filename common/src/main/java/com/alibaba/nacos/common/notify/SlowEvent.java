@@ -17,6 +17,7 @@
 package com.alibaba.nacos.common.notify;
 
 /**
+ * 此事件共享一个事件队列
  * This event share one event-queue.
  *
  * @author <a href="mailto:liaochuntao@live.com">liaochuntao</a>

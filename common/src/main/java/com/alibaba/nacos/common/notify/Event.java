@@ -20,6 +20,7 @@ import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
+ * 事件的抽象类
  * An abstract class for event.
  *
  * @author <a href="mailto:liaochuntao@live.com">liaochuntao</a>
@@ -27,19 +28,22 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 @SuppressWarnings({"PMD.AbstractClassShouldStartWithAbstractNamingRule"})
 public abstract class Event implements Serializable {
-    
+
     private static final AtomicLong SEQUENCE = new AtomicLong(0);
-    
+
     private final long sequence = SEQUENCE.getAndIncrement();
-    
+
     /**
+     * 事件序列号，可用于处理事件的序列
+     *
      * Event sequence number, which can be used to handle the sequence of events.
      *
      * @return sequence num, It's best to make sure it's monotone.
      */
     public long sequence() {
+        System.out.println("------>获取事件序列号" + sequence);
         return sequence;
     }
-    
+
 }
 

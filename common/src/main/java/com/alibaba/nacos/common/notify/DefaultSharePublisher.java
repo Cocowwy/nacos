@@ -26,6 +26,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
+ * 慢事件的默认共享事件发布者实现
  * The default share event publisher implementation for slow event.
  *
  * @author zongtanghu
@@ -81,6 +82,7 @@ public class DefaultSharePublisher extends DefaultPublisher implements ShardedEv
     public void receiveEvent(Event event) {
         
         final long currentEventSequence = event.sequence();
+        // 根据慢事件类型获取订阅者集
         // get subscriber set based on the slow EventType.
         final Class<? extends SlowEvent> slowEventType = (Class<? extends SlowEvent>) event.getClass();
         
@@ -90,16 +92,19 @@ public class DefaultSharePublisher extends DefaultPublisher implements ShardedEv
             LOGGER.debug("[NotifyCenter] No subscribers for slow event {}", slowEventType.getName());
             return;
         }
-        
+
+        // 通知单事件订阅者
         // Notification single event subscriber
         for (Subscriber subscriber : subscribers) {
+            // 是否忽略过期事件
             // Whether to ignore expiration events
             if (subscriber.ignoreExpireEvent() && lastEventSequence > currentEventSequence) {
                 LOGGER.debug("[NotifyCenter] the {} is unacceptable to this subscriber, because had expire",
                         event.getClass());
                 continue;
             }
-            
+
+            // 通知单个订阅者慢事件
             // Notify single subscriber for slow event.
             notifySubscriber(subscriber, event);
         }

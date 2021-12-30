@@ -121,7 +121,7 @@ public class InstanceController {
 
         final Instance instance = HttpRequestInstanceBuilder.newBuilder()
                 .setDefaultInstanceEphemeral(switchDomain.isDefaultInstanceEphemeral()).setRequest(request).build();
-        
+        // InstanceOperatorClientImpl
         getInstanceOperator().registerInstance(namespaceId, serviceName, instance);
         return "ok";
     }
