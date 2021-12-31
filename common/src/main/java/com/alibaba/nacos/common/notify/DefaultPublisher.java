@@ -82,6 +82,7 @@ public class DefaultPublisher extends Thread implements EventPublisher {
             if (queueMaxSize == -1) {
                 queueMaxSize = ringBufferSize;
             }
+            // 打开开关
             initialized = true;
         }
     }

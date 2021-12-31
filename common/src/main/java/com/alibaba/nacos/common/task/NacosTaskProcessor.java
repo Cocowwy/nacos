@@ -24,6 +24,7 @@ package com.alibaba.nacos.common.task;
 public interface NacosTaskProcessor {
     
     /**
+     * 处理任务
      * Process task.
      *
      * @param task     task.

@@ -52,10 +52,12 @@ public class DiskUtil {
     }
     
     /**
+     * 将配置信息保存到磁盘
      * Save configuration information to disk.
      */
     public static void saveToDisk(String dataId, String group, String tenant, String content) throws IOException {
         File targetFile = targetFile(dataId, group, tenant);
+        // 用户目录下的 \nacos\data\config-data\DEFAULT_GROUP\xxxxx.yml
         FileUtils.writeStringToFile(targetFile, content, Constants.ENCODE);
     }
     
@@ -102,6 +104,7 @@ public class DiskUtil {
     }
     
     /**
+     * 返回服务器缓存文件的路径
      * Returns the path of the server cache file.
      */
     public static File targetFile(String dataId, String group, String tenant) {

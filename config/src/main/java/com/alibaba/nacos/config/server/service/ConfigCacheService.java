@@ -47,6 +47,7 @@ import static com.alibaba.nacos.config.server.utils.LogUtil.FATAL_LOG;
 import static com.alibaba.nacos.config.server.utils.LogUtil.DEFAULT_LOG;
 
 /**
+ * 配置缓存服务
  * Config service.
  *
  * @author Nacos
@@ -64,6 +65,8 @@ public class ConfigCacheService {
     private static final String DISK_QUATA_EN = "Disk quota exceeded";
 
     /**
+     * 缓存md5加密后的配置
+     * application-dev.yml+DEFAULT_GROUP --->  xxxxx
      * groupKey -> cacheItem.
      */
     private static final ConcurrentHashMap<String, CacheItem> CACHE = new ConcurrentHashMap<String, CacheItem>();
@@ -80,21 +83,25 @@ public class ConfigCacheService {
     }
     
     /**
+     * 保存配置文件并更新缓存中的 md5 值
      * Save config file and update md5 value in cache.
      *
-     * @param dataId         dataId string value.
-     * @param group          group string value.
+     * @param dataId         dataId string value.  application-dev.yml
+     * @param group          group string value.   DEFAULT_GROUP
      * @param tenant         tenant string value.
      * @param content        content string value.
      * @param lastModifiedTs lastModifiedTs.
-     * @param type           file type.
+     * @param type           file type.             yaml
      * @return dumpChange success or not.
      */
     public static boolean dump(String dataId, String group, String tenant, String content, long lastModifiedTs,
             String type) {
+        // groupKey = application-dev.yml+DEFAULT_GROUP
         String groupKey = GroupKey2.getKey(dataId, group, tenant);
         CacheItem ci = makeSure(groupKey);
         ci.setType(type);
+
+        // 给这个cacheItem加了一把写锁
         final int lockResult = tryWriteLock(groupKey);
         assert (lockResult != 0);
         
@@ -128,6 +135,7 @@ public class ConfigCacheService {
             }
             return false;
         } finally {
+            // 释放缓存的写锁
             releaseWriteLock(groupKey);
         }
     }
@@ -537,6 +545,7 @@ public class ConfigCacheService {
     }
     
     /**
+     * 从缓存中获取并返回内容 md5 值。空字符串表示没有数据
      * Get and return content md5 value from cache. Empty string represents no data.
      */
     public static String getContentMd5(String groupKey) {
@@ -672,7 +681,7 @@ public class ConfigCacheService {
         }
     }
     
-    static CacheItem makeSure(final String groupKey) {
+    static CacheItem  makeSure(final String groupKey) {
         CacheItem item = CACHE.get(groupKey);
         if (null != item) {
             return item;

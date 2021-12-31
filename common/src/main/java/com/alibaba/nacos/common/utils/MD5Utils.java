@@ -61,6 +61,7 @@ public class MD5Utils {
     }
     
     /**
+     * 使用编码字符集计算 MD5 十六进制字符串
      * Calculate MD5 hex string with encode charset.
      *
      * @param value  value

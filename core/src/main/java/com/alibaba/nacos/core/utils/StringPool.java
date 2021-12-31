@@ -22,6 +22,7 @@ import com.alibaba.nacos.common.cache.builder.CacheBuilder;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * StringPool，旨在减少内存分配
  * StringPool,aim to reduce memory allocation.
  *
  * @author liuzunfei

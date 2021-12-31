@@ -54,7 +54,8 @@ public class NotifyCenter {
     private static final AtomicBoolean CLOSED = new AtomicBoolean(false);
     
     private static final EventPublisherFactory DEFAULT_PUBLISHER_FACTORY;
-    
+
+    // 单例申明
     private static final NotifyCenter INSTANCE = new NotifyCenter();
     
     private DefaultSharePublisher sharePublisher;
@@ -298,9 +299,10 @@ public class NotifyCenter {
         if (ClassUtils.isAssignableFrom(SlowEvent.class, eventType)) {
             return INSTANCE.sharePublisher.publish(event);
         }
-        
+        // com.alibaba.nacos.config.server.model.event.LocalDataChangeEvent
         final String topic = ClassUtils.getCanonicalName(eventType);
-        
+
+        // nacos.publisher-com.alibaba.nacos.config.server.model.event.LocalDataChangeEvent
         EventPublisher publisher = INSTANCE.publisherMap.get(topic);
         if (publisher != null) {
             return publisher.publish(event);
