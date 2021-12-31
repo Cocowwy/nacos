@@ -47,6 +47,7 @@ import com.alibaba.nacos.naming.web.NamingResourceParser;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.google.gson.JsonObject;
 import org.apache.commons.collections.CollectionUtils;
 import com.alibaba.nacos.common.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,8 +118,8 @@ public class InstanceController {
         // ip='192.168.1.10',
         // port=10001, weight=1.0, healthy=true, enabled=true,
         // ephemeral=true, clusterName='DEFAULT', serviceName='DEFAULT_GROUP@@server1',
-        // metadata={preserved.register.source=SPRING_CLOUD}}
-
+        // metadata={preserved.register.source=SPRING_CLOUD}
+        // }
         final Instance instance = HttpRequestInstanceBuilder.newBuilder()
                 .setDefaultInstanceEphemeral(switchDomain.isDefaultInstanceEphemeral()).setRequest(request).build();
         // InstanceOperatorClientImpl

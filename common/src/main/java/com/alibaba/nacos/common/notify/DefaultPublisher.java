@@ -187,9 +187,9 @@ public class DefaultPublisher extends Thread implements EventPublisher {
             return;
         }
 
-        // Notification single event listener
+        // Notification single event listener 通知单事件监听器
         for (Subscriber subscriber : subscribers) {
-            // Whether to ignore expiration events
+            // Whether to ignore expiration events 是否忽略过期事件
             if (subscriber.ignoreExpireEvent() && lastEventSequence > currentEventSequence) {
                 LOGGER.debug("[NotifyCenter] the {} is unacceptable to this subscriber, because had expire",
                         event.getClass());
