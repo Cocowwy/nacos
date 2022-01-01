@@ -71,6 +71,7 @@ public class ClientOperationEvent extends Event {
     }
     
     /**
+     * 客户端订阅服务事件
      * Client subscribe service event.
      */
     public static class ClientSubscribeServiceEvent extends ClientOperationEvent {
