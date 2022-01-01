@@ -50,7 +50,7 @@ import java.util.Properties;
  * @author nkorange
  */
 @SuppressWarnings("PMD.ServiceOrDaoClassShouldEndWithImplRule")
-public class NacosNamingService implements NamingService {
+public class  NacosNamingService implements NamingService {
     
     private static final String DEFAULT_NAMING_LOG_FILE_PATH =  "naming.log";
     
@@ -76,11 +76,13 @@ public class NacosNamingService implements NamingService {
         properties.setProperty(PropertyKeyConst.SERVER_ADDR, serverList);
         init(properties);
     }
-    
+
+    // 构造
     public NacosNamingService(Properties properties) throws NacosException {
         init(properties);
     }
-    
+
+    // NacosNamingService 构造器
     private void init(Properties properties) throws NacosException {
         ValidatorUtils.checkInitParam(properties);
         this.namespace = InitUtils.initNamespaceForNaming(properties);
@@ -117,7 +119,15 @@ public class NacosNamingService implements NamingService {
     public void registerInstance(String serviceName, String groupName, String ip, int port) throws NacosException {
         registerInstance(serviceName, groupName, ip, port, Constants.DEFAULT_CLUSTER_NAME);
     }
-    
+
+    /**
+     * client端进行实例注册
+     * @param serviceName name of service
+     * @param ip          instance ip
+     * @param port        instance port
+     * @param clusterName instance cluster name
+     * @throws NacosException
+     */
     @Override
     public void registerInstance(String serviceName, String ip, int port, String clusterName) throws NacosException {
         registerInstance(serviceName, Constants.DEFAULT_GROUP, ip, port, clusterName);
@@ -142,6 +152,7 @@ public class NacosNamingService implements NamingService {
     @Override
     public void registerInstance(String serviceName, String groupName, Instance instance) throws NacosException {
         NamingUtils.checkInstanceIsLegal(instance);
+        // NamingClientProxyDelegate  extend  NamingClientProxy
         clientProxy.registerService(serviceName, groupName, instance);
     }
     

@@ -90,6 +90,7 @@ public class NamingGrpcRedoService implements ConnectionEventListener {
     }
     
     /**
+     * 缓存注册实例以进行重做
      * Cache registered instance for redo.
      *
      * @param serviceName service name

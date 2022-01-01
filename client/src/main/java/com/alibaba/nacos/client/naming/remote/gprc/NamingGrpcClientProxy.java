@@ -116,6 +116,7 @@ public class NamingGrpcClientProxy extends AbstractNamingClientProxy {
     }
     
     /**
+     * 注册逻辑
      * Execute register operation.
      *
      * @param serviceName name of service
@@ -126,7 +127,14 @@ public class NamingGrpcClientProxy extends AbstractNamingClientProxy {
     public void doRegisterService(String serviceName, String groupName, Instance instance) throws NacosException {
         InstanceRequest request = new InstanceRequest(namespaceId, serviceName, groupName,
                 NamingRemoteConstants.REGISTER_INSTANCE, instance);
+
+        // 客户端信息
+        // Instance{instanceId='null', ip='11.11.11.11',
+        // port=8888, weight=1.0, healthy=true, enabled=true,
+        // ephemeral=true, clusterName='TEST1', serviceName='null',
+        // metadata={}}
         requestToServer(request, Response.class);
+
         redoService.instanceRegistered(serviceName, groupName);
     }
     

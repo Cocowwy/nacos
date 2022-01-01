@@ -48,6 +48,10 @@ public class NamingFactory {
     /**
      * Create a new naming service.
      *
+     * 反射 实例化
+     * {@link com.alibaba.nacos.client.naming.NacosNamingService#NacosNamingService}
+     * {@link com.alibaba.nacos.client.naming.NacosNamingService#init(Properties)}
+     *
      * @param properties naming service properties
      * @return new naming service
      * @throws NacosException nacos exception

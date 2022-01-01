@@ -120,6 +120,7 @@ public class InstanceController {
         // ephemeral=true, clusterName='DEFAULT', serviceName='DEFAULT_GROUP@@server1',
         // metadata={preserved.register.source=SPRING_CLOUD}
         // }
+
         final Instance instance = HttpRequestInstanceBuilder.newBuilder()
                 .setDefaultInstanceEphemeral(switchDomain.isDefaultInstanceEphemeral()).setRequest(request).build();
         // InstanceOperatorClientImpl

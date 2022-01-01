@@ -34,6 +34,7 @@ import java.util.Set;
 public interface NamingClientProxy extends Closeable {
     
     /**
+     * 使用指定的实例属性注册要服务的实例
      * Register a instance to service with specified instance properties.
      *
      * @param serviceName name of service

@@ -16,25 +16,31 @@
 
 package com.alibaba.nacos.example;
 
-import java.util.Properties;
-
 import com.alibaba.nacos.api.exception.NacosException;
 import com.alibaba.nacos.api.naming.NamingFactory;
 import com.alibaba.nacos.api.naming.NamingService;
+import com.alibaba.nacos.api.naming.remote.request.AbstractNamingRequest;
+import com.alibaba.nacos.client.naming.remote.gprc.NamingGrpcClientProxy;
+
+import java.util.Properties;
 
 /**
  * Hello world.
+ *
+ * register request see -> {@link NamingGrpcClientProxy#requestToServer(AbstractNamingRequest, Class)}
  *
  * @author xxc
  */
 public class App {
     public static void main(String[] args) throws NacosException {
         Properties properties = new Properties();
-        properties.setProperty("serverAddr", "21.34.53.5:8848,21.34.53.6:8848");
-        properties.setProperty("namespace", "quickStart");
+        properties.setProperty("serverAddr", "localhost:8848");
+        // like public,dev,test,prod...
+        properties.setProperty("namespace", "public");
         NamingService naming = NamingFactory.createNamingService(properties);
-        naming.registerInstance("nacos.test.3", "11.11.11.11", 8888, "TEST1");
-        naming.registerInstance("nacos.test.3", "2.2.2.2", 9999, "DEFAULT");
+        naming.registerInstance("service1", "11.11.11.11", 8888, "DEFAULT");
+        naming.registerInstance("service1", "2.2.2.2", 9999, "DEFAULT");
+        System.out.println("example----------App");
         System.out.println(naming.getAllInstances("nacos.test.3"));
     }
 }

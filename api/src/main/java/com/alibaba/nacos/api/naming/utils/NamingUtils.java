@@ -116,7 +116,9 @@ public class NamingUtils {
      * <p>Check instance param about keep alive.</p>
      *
      * <pre>
+     *      心跳超时必须 > 心跳间隔
      * heart beat timeout must > heart beat interval
+     *      ip 删除超时必须 > 心跳间隔
      * ip delete timeout must  > heart beat interval
      * </pre>
      *

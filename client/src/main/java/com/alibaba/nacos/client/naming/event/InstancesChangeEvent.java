@@ -22,6 +22,7 @@ import com.alibaba.nacos.common.notify.Event;
 import java.util.List;
 
 /**
+ * 实例更改事件
  * Instances change event.
  *
  * @author horizonzy
