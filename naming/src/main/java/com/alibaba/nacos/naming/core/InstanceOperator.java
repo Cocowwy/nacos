@@ -35,6 +35,8 @@ import java.util.Map;
 public interface InstanceOperator {
     
     /**
+     * 以AP方式注册实例到服务
+     * 一致性（Consistency）、可用性（Availability）、分区容错性（Partition tolerance）
      * Register an instance to a service in AP mode.
      *
      * @param namespaceId id of namespace

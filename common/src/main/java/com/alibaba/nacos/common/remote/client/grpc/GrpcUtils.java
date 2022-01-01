@@ -111,7 +111,7 @@ public class GrpcUtils {
         
     }
     
-    /**
+    /** 将请求转换为有效负载
      * convert request to payload.
      *
      * @param request request.
@@ -123,7 +123,10 @@ public class GrpcUtils {
                 .setClientIp(NetUtils.localIP()).putAllHeaders(request.getHeaders()).build();
         request.clearHeaders();
         String jsonString = toJson(request);
-        
+        // {"headers":{},"namespace":"public","serviceName":"service1","groupName":"DEFAULT_GROUP","type":"registerInstance",
+        // "instance":{"ip":"11.11.11.11","port":8888,"weight":1.0,"healthy":true,"enabled":true,"ephemeral":true,"clusterName":"DEFAULT","metadata":{},
+        // "instanceHeartBeatInterval":5000,"ipDeleteTimeout":30000,"instanceIdGenerator":"simple","instanceHeartBeatTimeOut":15000},
+        // "module":"naming"}
         Payload.Builder builder = Payload.newBuilder();
     
         return builder

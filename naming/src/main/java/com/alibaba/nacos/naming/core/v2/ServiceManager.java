@@ -30,26 +30,26 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author xiweng.yy
  */
 public class ServiceManager {
-    
+
     private static final ServiceManager INSTANCE = new ServiceManager();
-    
+
     private final ConcurrentHashMap<Service, Service> singletonRepository;
-    
+
     private final ConcurrentHashMap<String, Set<Service>> namespaceSingletonMaps;
-    
+
     private ServiceManager() {
         singletonRepository = new ConcurrentHashMap<>(1 << 10);
         namespaceSingletonMaps = new ConcurrentHashMap<>(1 << 2);
     }
-    
+
     public static ServiceManager getInstance() {
         return INSTANCE;
     }
-    
+
     public Set<Service> getSingletons(String namespace) {
         return namespaceSingletonMaps.getOrDefault(namespace, new HashSet<>(1));
     }
-    
+
     /**
      * Get singleton service. Put to manager if no singleton.
      *
@@ -59,11 +59,18 @@ public class ServiceManager {
     public Service getSingleton(Service service) {
         singletonRepository.putIfAbsent(service, service);
         Service result = singletonRepository.get(service);
+        // 如果该命名空间不存在，则在该命名空间的维度创建一个set集合，存储该命名空间下的service
         namespaceSingletonMaps.computeIfAbsent(result.getNamespace(), (namespace) -> new ConcurrentHashSet<>());
         namespaceSingletonMaps.get(result.getNamespace()).add(result);
+
+        // 可以改写成这样..
+//        namespaceSingletonMaps.computeIfAbsent(result.getNamespace(), (namespace) -> new ConcurrentHashSet<Service>() {{
+//            add(result);
+//        }});
+
         return result;
     }
-    
+
     /**
      * Get singleton service if Exist.
      *
@@ -75,7 +82,7 @@ public class ServiceManager {
     public Optional<Service> getSingletonIfExist(String namespace, String group, String name) {
         return getSingletonIfExist(Service.newService(namespace, group, name));
     }
-    
+
     /**
      * Get singleton service if Exist.
      *
@@ -85,11 +92,11 @@ public class ServiceManager {
     public Optional<Service> getSingletonIfExist(Service service) {
         return Optional.ofNullable(singletonRepository.get(service));
     }
-    
+
     public Set<String> getAllNamespaces() {
         return namespaceSingletonMaps.keySet();
     }
-    
+
     /**
      * Remove singleton service.
      *
@@ -102,11 +109,11 @@ public class ServiceManager {
         }
         return singletonRepository.remove(service);
     }
-    
+
     public boolean containSingleton(Service service) {
         return singletonRepository.containsKey(service);
     }
-    
+
     public int size() {
         return singletonRepository.size();
     }
