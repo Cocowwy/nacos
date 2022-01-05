@@ -64,8 +64,30 @@ public class NotifyCenter {
 
     /**
      * 发布者管理容器
+     * result = {ConcurrentHashMap@16419}  size = 19
+     *  "com.alibaba.nacos.config.server.model.event.ConfigDataChangeEvent" -> {DefaultPublisher@12282} "Thread[nacos.publisher-com.alibaba.nacos.config.server.model.event.ConfigDataChangeEvent,5,main]"
+     *  "com.alibaba.nacos.naming.core.v2.event.client.ClientEvent.ClientChangedEvent" -> {NamingEventPublisher@12893} "Thread[naming.publisher-ClientEvent,5,main]"
+     *  "com.alibaba.nacos.naming.core.v2.event.client.ClientOperationEvent.ClientRegisterServiceEvent" -> {NamingEventPublisher@12903} "Thread[naming.publisher-ClientOperationEvent,5,main]"
+     *  "com.alibaba.nacos.naming.consistency.ValueChangeEvent" -> {DefaultPublisher@11347} "Thread[nacos.publisher-com.alibaba.nacos.naming.consistency.ValueChangeEvent,5,main]"
+     *  "com.alibaba.nacos.naming.core.v2.event.client.ClientOperationEvent.ClientDeregisterServiceEvent" -> {NamingEventPublisher@12903} "Thread[naming.publisher-ClientOperationEvent,5,main]"
+     *  "com.alibaba.nacos.naming.core.v2.event.client.ClientEvent.ClientVerifyFailedEvent" -> {NamingEventPublisher@12893} "Thread[naming.publisher-ClientEvent,5,main]"
+     *  "com.alibaba.nacos.naming.core.v2.event.client.ClientOperationEvent.ClientSubscribeServiceEvent" -> {NamingEventPublisher@12903} "Thread[naming.publisher-ClientOperationEvent,5,main]"
+     *  "com.alibaba.nacos.core.cluster.MembersChangeEvent" -> {DefaultPublisher@11296} "Thread[nacos.publisher-com.alibaba.nacos.core.cluster.MembersChangeEvent,5,main]"
+     *  "com.alibaba.nacos.naming.core.v2.event.service.ServiceEvent.ServiceChangedEvent" -> {NamingEventPublisher@13894} "Thread[naming.publisher-ServiceEvent,5,main]"
+     *  "com.alibaba.nacos.core.remote.control.TpsControlRuleChangeEvent" -> {DefaultPublisher@12120} "Thread[nacos.publisher-com.alibaba.nacos.core.remote.control.TpsControlRuleChangeEvent,5,main]"
+     *  "com.alibaba.nacos.naming.core.v2.event.client.ClientOperationEvent.ClientUnsubscribeServiceEvent" -> {NamingEventPublisher@12903} "Thread[naming.publisher-ClientOperationEvent,5,main]"
+     *  "com.alibaba.nacos.core.remote.event.ConnectionLimitRuleChangeEvent" -> {DefaultPublisher@12108} "Thread[nacos.publisher-com.alibaba.nacos.core.remote.event.ConnectionLimitRuleChangeEvent,5,main]"
+     *  "com.alibaba.nacos.config.server.model.event.LocalDataChangeEvent" -> {DefaultPublisher@12117} "Thread[nacos.publisher-com.alibaba.nacos.config.server.model.event.LocalDataChangeEvent,5,main]"
+     *  "com.alibaba.nacos.naming.core.v2.event.client.ClientEvent.ClientDisconnectEvent" -> {NamingEventPublisher@12893} "Thread[naming.publisher-ClientEvent,5,main]"
+     *  "com.alibaba.nacos.naming.core.v2.event.service.ServiceEvent.ServiceSubscribedEvent" -> {NamingEventPublisher@13894} "Thread[naming.publisher-ServiceEvent,5,main]"
+     *  "com.alibaba.nacos.naming.core.v2.upgrade.UpgradeStates.UpgradeStateChangedEvent" -> {DefaultPublisher@11497} "Thread[nacos.publisher-com.alibaba.nacos.naming.core.v2.upgrade.UpgradeStates$UpgradeStateChangedEvent,5,main]"
+     *  "com.alibaba.nacos.naming.core.v2.event.metadata.MetadataEvent.InstanceMetadataEvent" -> {NamingEventPublisher@12905} "Thread[naming.publisher-MetadataEvent,5,main]"
+     *  "com.alibaba.nacos.naming.core.v2.event.metadata.MetadataEvent.ServiceMetadataEvent" -> {NamingEventPublisher@12905} "Thread[naming.publisher-MetadataEvent,5,main]"
+     *  "com.alibaba.nacos.common.event.ServerConfigChangeEvent" -> {DefaultPublisher@10365} "Thread[nacos.publisher-com.alibaba.nacos.common.event.ServerConfigChangeEvent,5,main]"
      * Publisher management container.
      */
+
+    // EventPublisher impl NamingEventPublisher and extend thread
     private final Map<String, EventPublisher> publisherMap = new ConcurrentHashMap<>(16);
 
     static {
@@ -304,7 +326,7 @@ public class NotifyCenter {
         // com.alibaba.nacos.naming.core.v2.event.client.ClientEvent.ClientChangedEvent 客户端修改的相关事件
         // com.alibaba.nacos.naming.core.v2.event.client.ClientOperationEvent.ClientSubscribeServiceEvent 这个事件好像每几秒都会被调用
         final String topic = ClassUtils.getCanonicalName(eventType);
-        System.out.println("-------->publishEvent:topic:" + topic);
+//        System.out.println("-------->publishEvent:topic:" + topic);
 
         // nacos.publisher-com.alibaba.nacos.config.server.model.event.LocalDataChangeEvent
         EventPublisher publisher = INSTANCE.publisherMap.get(topic);

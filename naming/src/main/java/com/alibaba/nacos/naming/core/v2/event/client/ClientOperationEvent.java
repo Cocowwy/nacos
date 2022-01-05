@@ -59,6 +59,7 @@ public class ClientOperationEvent extends Event {
     }
     
     /**
+     * 客户端注销服务事件
      * Client deregister service event.
      */
     public static class ClientDeregisterServiceEvent extends ClientOperationEvent {

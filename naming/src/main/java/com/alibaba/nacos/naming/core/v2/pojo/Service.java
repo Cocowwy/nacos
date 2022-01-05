@@ -38,7 +38,8 @@ public class Service implements Serializable {
     private final String name;
     
     private final boolean ephemeral;
-    
+
+    // 版本号，服务变更次数的
     private final AtomicLong revision;
     
     private long lastUpdatedTime;

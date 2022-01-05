@@ -23,6 +23,8 @@ import java.util.concurrent.atomic.AtomicLong;
  * 事件的抽象类
  * An abstract class for event.
  *
+ *
+ *
  * @author <a href="mailto:liaochuntao@live.com">liaochuntao</a>
  * @author zongtanghu
  */
@@ -41,7 +43,7 @@ public abstract class Event implements Serializable {
      * @return sequence num, It's best to make sure it's monotone.
      */
     public long sequence() {
-        System.out.println("------>获取事件序列号" + sequence);
+//        System.out.println("------>获取事件序列号" + sequence);
         return sequence;
     }
 

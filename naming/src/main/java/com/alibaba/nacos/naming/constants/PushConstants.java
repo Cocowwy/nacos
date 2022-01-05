@@ -27,7 +27,8 @@ public class PushConstants {
      * Naming push task delay time, unit: milliseconds.
      */
     public static final String PUSH_TASK_DELAY = "nacos.naming.push.pushTaskDelay";
-    
+
+    // 默认推送任务延迟
     public static final long DEFAULT_PUSH_TASK_DELAY = 500L;
     
     /**

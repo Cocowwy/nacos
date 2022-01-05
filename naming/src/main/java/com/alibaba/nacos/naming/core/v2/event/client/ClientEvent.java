@@ -20,6 +20,7 @@ import com.alibaba.nacos.common.notify.Event;
 import com.alibaba.nacos.naming.core.v2.client.Client;
 
 /**
+ * 客户端事件
  * Client event.
  *
  * @author xiweng.yy
@@ -39,6 +40,7 @@ public class ClientEvent extends Event {
     }
     
     /**
+     * 客户端更改事件
      * Client changed event. Happened when {@code Client} add or remove service.
      */
     public static class ClientChangedEvent extends ClientEvent {
@@ -52,6 +54,7 @@ public class ClientEvent extends Event {
     }
     
     /**
+     * 客户端断开事件
      * Client disconnect event. Happened when {@code Client} disconnect with server.
      */
     public static class ClientDisconnectEvent extends ClientEvent {

@@ -36,6 +36,7 @@ import static com.alibaba.nacos.naming.core.v2.upgrade.doublewrite.delay.DoubleW
 import static com.alibaba.nacos.naming.core.v2.upgrade.doublewrite.delay.DoubleWriteContent.METADATA;
 
 /**
+ * 双重写入的事件侦听器
  * Event listener for double write.
  *
  * @author xiweng.yy
