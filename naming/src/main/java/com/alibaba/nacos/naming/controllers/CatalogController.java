@@ -55,7 +55,7 @@ import java.util.Map;
 @RestController
 @RequestMapping(UtilsAndCommons.NACOS_NAMING_CONTEXT + UtilsAndCommons.NACOS_NAMING_CATALOG_CONTEXT)
 public class CatalogController {
-    
+
     @Autowired
     protected ServiceManager serviceManager;
     

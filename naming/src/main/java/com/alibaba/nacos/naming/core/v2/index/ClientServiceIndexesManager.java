@@ -141,7 +141,8 @@ public class ClientServiceIndexesManager extends SmartSubscriber {
         // 发布了一个服务变更时间..搁这套娃呢？
         NotifyCenter.publishEvent(new ServiceEvent.ServiceChangedEvent(service, true));
     }
-
+    //  1.publisherIndexes remove
+    //  2.publish ServiceChangedEvent
     private void removePublisherIndexes(Service service, String clientId) {
         if (!publisherIndexes.containsKey(service)) {
             return;
