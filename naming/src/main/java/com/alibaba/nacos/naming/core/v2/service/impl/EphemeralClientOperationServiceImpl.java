@@ -38,13 +38,13 @@ import org.springframework.stereotype.Component;
  */
 @Component("ephemeralClientOperationService")
 public class EphemeralClientOperationServiceImpl implements ClientOperationService {
-    
+
     private final ClientManager clientManager;
-    
+
     public EphemeralClientOperationServiceImpl(ClientManagerDelegate clientManager) {
         this.clientManager = clientManager;
     }
-    
+
     @Override
     public void registerInstance(Service service, Instance instance, String clientId) {
         Service singleton = ServiceManager.getInstance().getSingleton(service);
@@ -58,10 +58,10 @@ public class EphemeralClientOperationServiceImpl implements ClientOperationServi
         // 发布事件
         // 客户端注册事件
         NotifyCenter.publishEvent(new ClientOperationEvent.ClientRegisterServiceEvent(singleton, clientId));
-        NotifyCenter // 实例元数据事件
-                .publishEvent(new MetadataEvent.InstanceMetadataEvent(singleton, instanceInfo.getMetadataId(), false));
+        // 实例元数据事件
+        NotifyCenter.publishEvent(new MetadataEvent.InstanceMetadataEvent(singleton, instanceInfo.getMetadataId(), false));
     }
-    
+
     @Override
     public void deregisterInstance(Service service, Instance instance, String clientId) {
         if (!ServiceManager.getInstance().containSingleton(service)) {
@@ -81,7 +81,7 @@ public class EphemeralClientOperationServiceImpl implements ClientOperationServi
                     new MetadataEvent.InstanceMetadataEvent(singleton, removedInstance.getMetadataId(), true));
         }
     }
-    
+
     @Override
     public void subscribeService(Service service, Subscriber subscriber, String clientId) {
         Service singleton = ServiceManager.getInstance().getSingletonIfExist(service).orElse(service);
@@ -93,7 +93,7 @@ public class EphemeralClientOperationServiceImpl implements ClientOperationServi
         client.setLastUpdatedTime();
         NotifyCenter.publishEvent(new ClientOperationEvent.ClientSubscribeServiceEvent(singleton, clientId));
     }
-    
+
     @Override
     public void unsubscribeService(Service service, Subscriber subscriber, String clientId) {
         Service singleton = ServiceManager.getInstance().getSingletonIfExist(service).orElse(service);
@@ -105,7 +105,7 @@ public class EphemeralClientOperationServiceImpl implements ClientOperationServi
         client.setLastUpdatedTime();
         NotifyCenter.publishEvent(new ClientOperationEvent.ClientUnsubscribeServiceEvent(singleton, clientId));
     }
-    
+
     private boolean clientIsLegal(Client client, String clientId) {
         if (client == null) {
             Loggers.SRV_LOG.warn("Client connection {} already disconnect", clientId);

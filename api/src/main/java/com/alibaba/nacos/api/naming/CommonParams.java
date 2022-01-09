@@ -17,6 +17,7 @@
 package com.alibaba.nacos.api.naming;
 
 /**
+ * 服务发现的常用参数
  * Common parameters for service discovery.
  *
  * @author nkorange

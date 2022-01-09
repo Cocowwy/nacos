@@ -157,7 +157,8 @@ public class NamingHttpClientProxy extends AbstractNamingClientProxy {
         params.put(IP_PARAM, instance.getIp());
         params.put(PORT_PARAM, String.valueOf(instance.getPort()));
         params.put(WEIGHT_PARAM, String.valueOf(instance.getWeight()));
-        params.put("enable", String.valueOf(instance.isEnabled()));
+//        params.put("enable", String.valueOf(instance.isEnabled()));  咋这个版本不用上面定义的了
+        params.put(ENABLE_PARAM, String.valueOf(instance.isEnabled()));
         params.put(HEALTHY_PARAM, String.valueOf(instance.isHealthy()));
         params.put(EPHEMERAL_PARAM, String.valueOf(instance.isEphemeral()));
         params.put(META_PARAM, JacksonUtils.toJson(instance.getMetadata()));
@@ -305,6 +306,7 @@ public class NamingHttpClientProxy extends AbstractNamingClientProxy {
         params.put(CommonParams.CLUSTER_NAME, beatInfo.getCluster());
         params.put(IP_PARAM, beatInfo.getIp());
         params.put(PORT_PARAM, String.valueOf(beatInfo.getPort()));
+//      /nacos/v1/ns/instance/beat
         String result = reqApi(UtilAndComs.nacosUrlBase + "/instance/beat", params, bodyMap, HttpMethod.PUT);
         return JacksonUtils.toObj(result);
     }

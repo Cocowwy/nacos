@@ -52,7 +52,8 @@ public class ClientOperationEvent extends Event {
     public static class ClientRegisterServiceEvent extends ClientOperationEvent {
         
         private static final long serialVersionUID = 3412396514440368087L;
-        
+
+        // 发送了一个事件  包装了一下client 以及 client
         public ClientRegisterServiceEvent(Service service, String clientId) {
             super(clientId, service);
         }

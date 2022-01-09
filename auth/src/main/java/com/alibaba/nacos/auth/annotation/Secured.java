@@ -25,6 +25,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
+ * Annotation 表明被注解的请求应该被授权
  * Annotation indicating that the annotated request should be authorized.
  *
  * @author nkorange
@@ -35,6 +36,7 @@ import java.lang.annotation.RetentionPolicy;
 public @interface Secured {
     
     /**
+     * 读/写
      * The action type of the request.
      *
      * @return action type, default READ

@@ -75,7 +75,8 @@ import static com.alibaba.nacos.naming.misc.UtilsAndCommons.DEFAULT_CLUSTER_NAME
  * @author nkorange
  */
 @RestController
-@RequestMapping(UtilsAndCommons.NACOS_NAMING_CONTEXT + UtilsAndCommons.NACOS_NAMING_INSTANCE_CONTEXT) // /v1/ns/instance
+//  nacos/v1/ns/instance
+@RequestMapping(UtilsAndCommons.NACOS_NAMING_CONTEXT + UtilsAndCommons.NACOS_NAMING_INSTANCE_CONTEXT)
 public class InstanceController {
     
     @Autowired
@@ -97,7 +98,9 @@ public class InstanceController {
     
     /**
      * Register new instance.
-     * 服务注册
+     * 服务注册--->client 端 post请求 nacos/v1/ns/instance
+     * 可能是这个，我用的客户端版本1.3.2
+     * client : {@link com.alibaba.nacos.client.naming.remote.http.NamingHttpClientProxy#registerService}
      * @param request http request
      * @return 'ok' if success
      * @throws Exception any error during register

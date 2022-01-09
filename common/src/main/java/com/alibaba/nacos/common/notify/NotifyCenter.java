@@ -87,7 +87,7 @@ public class NotifyCenter {
      * Publisher management container.
      */
 
-    // EventPublisher impl NamingEventPublisher and extend thread
+    // EventPublisher （values）  impl all extend thread
     private final Map<String, EventPublisher> publisherMap = new ConcurrentHashMap<>(16);
 
     static {
@@ -330,6 +330,7 @@ public class NotifyCenter {
 
         // nacos.publisher-com.alibaba.nacos.config.server.model.event.LocalDataChangeEvent
         EventPublisher publisher = INSTANCE.publisherMap.get(topic);
+        System.out.println("NotifyCenter#INSTANCE.publisherMap.size =" + INSTANCE.publisherMap.size());
         if (publisher != null) {
             return publisher.publish(event);
         }

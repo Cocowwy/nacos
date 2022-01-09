@@ -33,9 +33,9 @@ import org.springframework.stereotype.Component;
 @SuppressWarnings("PMD.ServiceOrDaoClassShouldEndWithImplRule")
 @Component
 public class ClientOperationServiceProxy implements ClientOperationService {
-    
+    // persistentClientOperationService
     private final ClientOperationService ephemeralClientOperationService;
-    
+    // persistentClientOperationService
     private final ClientOperationService persistentClientOperationService;
     
     public ClientOperationServiceProxy(EphemeralClientOperationServiceImpl ephemeralClientOperationService,
@@ -71,7 +71,7 @@ public class ClientOperationServiceProxy implements ClientOperationService {
         // Subscriber is an ephemeral type only, so call ephemeral client directly
         ephemeralClientOperationService.unsubscribeService(service, subscriber, clientId);
     }
-    
+    // 选择客户运营服务
     private ClientOperationService chooseClientOperationService(final Instance instance) {
         return instance.isEphemeral() ? ephemeralClientOperationService : persistentClientOperationService;
     }

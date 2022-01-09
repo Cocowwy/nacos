@@ -31,11 +31,12 @@ public class MetadataEvent extends Event {
     private final Service service;
     
     /**
+     * 标记此元数据是否已过期
      * Mark this metadata whether is expired.
-     *
+     * 表示原对象（服务或实例）已被删除，因此元数据已过期，需要删除。
      * <p>If value is {@code true}, means that the original object (service or instance) has been removed, so the
      * metadata has been expired, need be delete.
-     *
+     * 如果值为{code false}，则表示原始对象（服务或实例）已注册，元数据应停止删除
      * <p>If value is {code false}, means that the original object (service or instance) is registered, The metadata
      * should stop to delete.
      */
