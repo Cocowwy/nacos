@@ -43,7 +43,7 @@ public class NamingEventPublisher extends Thread implements ShardedEventPublishe
 
     private static final int DEFAULT_WAIT_TIME = 60;
 
-    // 我的理解是 key是事件 value应该是该事件的订阅者
+    // 我的理解是 key是事件 value应该是该事件的订阅者集合，即向这些订阅者（本质也是事件，因为实现了事件接口）进行广播事件信息
     private final Map<Class<? extends Event>, Set<Subscriber<? extends Event>>> subscribes = new ConcurrentHashMap<>();
 
     private volatile boolean initialized = false;

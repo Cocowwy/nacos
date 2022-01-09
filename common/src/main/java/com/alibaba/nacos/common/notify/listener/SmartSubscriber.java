@@ -21,6 +21,7 @@ import com.alibaba.nacos.common.notify.Event;
 import java.util.List;
 
 /**
+ * 可以监听多个事件的订阅者
  * Subscribers to multiple events can be listened to.
  *
  * @author <a href="mailto:liaochuntao@live.com">liaochuntao</a>
@@ -30,6 +31,7 @@ import java.util.List;
 public abstract class SmartSubscriber extends Subscriber {
     
     /**
+     * 实现该方法，用来返回多订阅的指定集合
      * Returns which event type are smartsubscriber interested in.
      *
      * @return The interestd event types.

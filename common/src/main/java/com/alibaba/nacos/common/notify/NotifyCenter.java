@@ -87,7 +87,7 @@ public class NotifyCenter {
      * Publisher management container.
      */
 
-    // EventPublisher （values）  impl all extend thread
+    // debug可以发现，publisherMap里面有19个entry，这些values均为 DefaultPublisher/NamingEventPublisher
     private final Map<String, EventPublisher> publisherMap = new ConcurrentHashMap<>(16);
 
     static {
@@ -121,7 +121,7 @@ public class NotifyCenter {
         };
 
         try {
-
+            // 创建并初始化 DefaultSharePublisher
             // Create and init DefaultSharePublisher instance.
             INSTANCE.sharePublisher = new DefaultSharePublisher();
             INSTANCE.sharePublisher.init(SlowEvent.class, shareBufferSize);
@@ -179,6 +179,7 @@ public class NotifyCenter {
     }
 
     /**
+     * 注册订阅者
      * Register a Subscriber. If the Publisher concerned by the Subscriber does not exist, then PublihserMap will
      * preempt a placeholder Publisher with default EventPublisherFactory first.
      *
@@ -198,6 +199,8 @@ public class NotifyCenter {
     public static void registerSubscriber(final Subscriber consumer, final EventPublisherFactory factory) {
         // If you want to listen to multiple events, you do it separately,
         // based on subclass's subscribeTypes method return list, it can register to publisher.
+        // 如果你想监听多个事件，你分开做
+        // 据子类的 subscribeTypes 方法返回列表，可以注册到发布者。
         if (consumer instanceof SmartSubscriber) {
             for (Class<? extends Event> subscribeType : ((SmartSubscriber) consumer).subscribeTypes()) {
                 // For case, producer: defaultSharePublisher -> consumer: smartSubscriber.
@@ -216,11 +219,13 @@ public class NotifyCenter {
             INSTANCE.sharePublisher.addSubscriber(consumer, subscribeType);
             return;
         }
-
+        // 如果不是多订阅  慢订阅
         addSubscriber(consumer, subscribeType, factory);
     }
 
+    // TODO 这里得着重理一下
     /**
+     * 将订阅者添加到发布者。
      * Add a subscriber to publisher.
      *
      * @param consumer      subscriber instance.
@@ -236,6 +241,8 @@ public class NotifyCenter {
             MapUtil.computeIfAbsent(INSTANCE.publisherMap, topic, factory, subscribeType, ringBufferSize);
         }
         EventPublisher publisher = INSTANCE.publisherMap.get(topic);
+        System.out.println("INSTANCE.publisherMap add " + topic);
+
         if (publisher instanceof ShardedEventPublisher) {
             ((ShardedEventPublisher) publisher).addSubscriber(consumer, subscribeType);
         } else {

@@ -45,6 +45,7 @@ public abstract class Subscriber<T extends Event> {
     public abstract void onEvent(T event);
     
     /**
+     * 获取当前订阅者的实际的类型
      * Type of this subscriber's subscription.
      *
      * @return Class which extends {@link Event}
@@ -52,7 +53,8 @@ public abstract class Subscriber<T extends Event> {
     public abstract Class<? extends Event> subscribeType();
     
     /**
-     * It is up to the listener to determine whether the callback is asynchronous or synchronous.
+     * 其实现类可以来决定是同步还是异步
+     * it is up to the listener to determine whether the callback is asynchronous or synchronous.
      *
      * @return {@link Executor}
      */

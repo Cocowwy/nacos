@@ -94,6 +94,15 @@ public class DefaultPublisher extends Thread implements EventPublisher {
 
     @Override
     public void run() {
+        System.out.println("=========> DefaultEventPublisher start running ~ this thread name : " + Thread.currentThread().getName());
+//        =========> DefaultEventPublisher start running ~ this thread name : nacos.publisher-com.alibaba.nacos.common.event.ServerConfigChangeEvent
+//        =========> DefaultEventPublisher start running ~ this thread name : nacos.publisher-com.alibaba.nacos.core.cluster.MembersChangeEvent
+//        =========> DefaultEventPublisher start running ~ this thread name : nacos.publisher-com.alibaba.nacos.naming.consistency.ValueChangeEvent
+//        =========> DefaultEventPublisher start running ~ this thread name : nacos.publisher-com.alibaba.nacos.naming.core.v2.upgrade.UpgradeStates$UpgradeStateChangedEvent
+//        =========> DefaultEventPublisher start running ~ this thread name : nacos.publisher-com.alibaba.nacos.core.remote.event.ConnectionLimitRuleChangeEvent
+//        =========> DefaultEventPublisher start running ~ this thread name : nacos.publisher-com.alibaba.nacos.config.server.model.event.LocalDataChangeEvent
+//        =========> DefaultEventPublisher start running ~ this thread name : nacos.publisher-com.alibaba.nacos.core.remote.control.TpsControlRuleChangeEvent
+//        =========> DefaultEventPublisher start running ~ this thread name : nacos.publisher-com.alibaba.nacos.config.server.model.event.ConfigDataChangeEvent
         openEventHandler();
     }
 
@@ -209,7 +218,7 @@ public class DefaultPublisher extends Thread implements EventPublisher {
         LOGGER.debug("[NotifyCenter] the {} will received by {}", event, subscriber);
 
         final Runnable job = () -> subscriber.onEvent(event);
-        // 线程池
+
         final Executor executor = subscriber.executor();
 
         if (executor != null) {
