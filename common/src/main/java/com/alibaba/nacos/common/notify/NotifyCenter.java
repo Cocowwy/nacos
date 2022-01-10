@@ -153,6 +153,7 @@ public class NotifyCenter {
 
     /**
      * Shutdown the several publisher instance which notify center has.
+     * 调用所有的事件发布者的shutdown  ---》Closeable 该接口定义的
      */
     public static void shutdown() {
         if (!CLOSED.compareAndSet(false, true)) {
@@ -224,9 +225,15 @@ public class NotifyCenter {
     }
 
     // TODO 这里得着重理一下
+
     /**
      * 将订阅者添加到发布者。
      * Add a subscriber to publisher.
+     *
+     *  logic：
+     *   - INSTANCE.publisherMap 添加 事件
+     *   - INSTANCE.publisherMap 添加对应事件的订阅者
+     *   - 其订阅者实际上也是一个Event
      *
      * @param consumer      subscriber instance.
      * @param subscribeType subscribeType.
@@ -240,12 +247,14 @@ public class NotifyCenter {
             // MapUtils.computeIfAbsent is a unsafe method.
             MapUtil.computeIfAbsent(INSTANCE.publisherMap, topic, factory, subscribeType, ringBufferSize);
         }
+        // factory 这里的INSTANCE.publisherMap 的 value 默认实现  见 DEFAULT_PUBLISHER_FACTORY 相当于放了它自己
         EventPublisher publisher = INSTANCE.publisherMap.get(topic);
-        System.out.println("INSTANCE.publisherMap add " + topic);
+        System.out.println("INSTANCE.publisherMap addKey[" + topic + "] value[" + publisher + "]");
 
         if (publisher instanceof ShardedEventPublisher) {
             ((ShardedEventPublisher) publisher).addSubscriber(consumer, subscribeType);
         } else {
+            // 给该事件添加订阅者
             publisher.addSubscriber(consumer);
         }
     }

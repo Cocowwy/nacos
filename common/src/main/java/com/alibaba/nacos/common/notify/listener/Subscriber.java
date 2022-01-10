@@ -32,8 +32,8 @@ public abstract class Subscriber<T extends Event> {
     /**
      * 订阅者执行Event时间
      * Subscriber
-     * 该event调用源头 see
-     * {@link com.alibaba.nacos.naming.core.v2.event.publisher.NamingEventPublisher#notifySubscriber}
+     *
+     * 源头 like {@link com.alibaba.nacos.naming.core.v2.event.publisher.NamingEventPublisher#notifySubscriber}
      *
      * 可以理解为：
      *   事件订阅者通过实现该onEvent接口，并执行相应的逻辑，调用方使用Runnable调用

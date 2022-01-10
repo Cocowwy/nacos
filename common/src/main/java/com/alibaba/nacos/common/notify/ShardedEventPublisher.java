@@ -21,6 +21,7 @@ import com.alibaba.nacos.common.notify.listener.Subscriber;
 /**
  * Sharded event publisher.
  *
+ * 支持一个发布者处理不同的事件
  * <p>To support one publisher for different events.
  *
  * @author xiweng.yy

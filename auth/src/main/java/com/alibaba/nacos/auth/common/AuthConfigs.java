@@ -32,6 +32,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.Objects;
 
 /**
+ * 认证相关配置
  * Auth related configurations.
  *
  * @author nkorange
