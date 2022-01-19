@@ -87,7 +87,8 @@ public class NotifyCenter {
      * Publisher management container.
      */
 
-    // debug可以发现，publisherMap里面有19个entry，这些values均为 DefaultPublisher/NamingEventPublisher
+    // key为Event抽象类的子类，我理解为一个事件，
+    // 这些values均为 DefaultPublisher/NamingEventPublisher
     private final Map<String, EventPublisher> publisherMap = new ConcurrentHashMap<>(16);
 
     static {

@@ -62,10 +62,14 @@ public class NamingEventPublisher extends Thread implements ShardedEventPublishe
         this.queue = new ArrayBlockingQueue<>(bufferSize);
         this.publisherName = type.getSimpleName();
         super.setName(THREAD_NAME + this.publisherName);
-        System.out.println("");
         super.setDaemon(true);
         super.start();
         initialized = true;
+        System.out.println("publisherName============="+publisherName);
+        // ClientOperationEvent
+        // MetadataEvent
+        // ServiceEvent
+        // ClientEvent
     }
 
     @Override
@@ -113,7 +117,6 @@ public class NamingEventPublisher extends Thread implements ShardedEventPublishe
     }
 
     // 向订阅者发送通知的落地
-
     /** demo:
      * {@link com.alibaba.nacos.naming.core.v2.index.ClientServiceIndexesManager#onEvent} 客户端操作时间，like 注册 注销 可以看这个里
      * @param subscriber {@link Subscriber}
