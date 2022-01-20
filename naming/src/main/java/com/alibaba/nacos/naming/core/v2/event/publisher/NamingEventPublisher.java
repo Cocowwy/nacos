@@ -108,6 +108,7 @@ public class NamingEventPublisher extends Thread implements ShardedEventPublishe
         // 将事件放到阻塞队列
         boolean success = this.queue.offer(event);
         System.out.println("-------->添加queue事件" + event);
+        System.out.println("当前添加事件的publisshName" + publisherName);
         if (!success) {
             Loggers.EVT_LOG.warn("unable to plug in due to interruption, synchronize sending time, event : {}", event);
             handleEvent(event);
