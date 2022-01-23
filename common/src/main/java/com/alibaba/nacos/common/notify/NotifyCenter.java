@@ -246,6 +246,7 @@ public class NotifyCenter {
         final String topic = ClassUtils.getCanonicalName(subscribeType);
         synchronized (NotifyCenter.class) {
             // MapUtils.computeIfAbsent is a unsafe method.
+            // 向map里保存了key是事件名，value是事件的发布者
             MapUtil.computeIfAbsent(INSTANCE.publisherMap, topic, factory, subscribeType, ringBufferSize);
         }
         // factory 这里的INSTANCE.publisherMap 的 value 默认实现  见 DEFAULT_PUBLISHER_FACTORY 相当于放了它自己

@@ -195,9 +195,11 @@ public class ServerMemberManager implements ApplicationListener<WebServerInitial
     
     private void registerClusterEvent() {
         // Register node change events
+        // 注册节点更改事件
         NotifyCenter.registerToPublisher(MembersChangeEvent.class,
                 EnvUtil.getProperty(MEMBER_CHANGE_EVENT_QUEUE_SIZE_PROPERTY, Integer.class, DEFAULT_MEMBER_CHANGE_EVENT_QUEUE_SIZE));
-        
+
+        // 注册本节点IP变更时需要动态修改本节点地址信息
         // The address information of this node needs to be dynamically modified
         // when registering the IP change of this node
         NotifyCenter.registerSubscriber(new Subscriber<InetUtils.IPChangeEvent>() {
