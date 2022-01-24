@@ -37,6 +37,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import static com.alibaba.nacos.api.exception.NacosException.SERVER_ERROR;
 
 /**
+ * 笔记地址：https://www.yuque.com/docs/share/da5d779f-fff0-45f9-a61a-7742cc763187?# 《NotifyCenter阅读》
+ *
  * 统一事件通知中心
  * Unified Event Notify Center.
  *
