@@ -352,6 +352,8 @@ public class NotifyCenter {
         EventPublisher publisher = INSTANCE.publisherMap.get(topic);
         System.out.println("NotifyCenter#INSTANCE.publisherMap.size =" + INSTANCE.publisherMap.size());
         if (publisher != null) {
+            System.out.println("A发布事件的ThreadId：" + Thread.currentThread().getId());
+
             return publisher.publish(event);
         }
         LOGGER.warn("There are no [{}] publishers for this event, please register", topic);

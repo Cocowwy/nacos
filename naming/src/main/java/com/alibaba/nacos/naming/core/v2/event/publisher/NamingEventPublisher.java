@@ -65,7 +65,6 @@ public class NamingEventPublisher extends Thread implements ShardedEventPublishe
         super.setDaemon(true);
         super.start();
         initialized = true;
-        System.out.println("publisherName============="+publisherName);
         // ClientOperationEvent
         // MetadataEvent
         // ServiceEvent
@@ -103,6 +102,8 @@ public class NamingEventPublisher extends Thread implements ShardedEventPublishe
 
     @Override
     public boolean publish(Event event) {
+        System.out.println("B发布事件的ThreadId：" + Thread.currentThread().getId());
+
         checkIsStart();
         // 入队 成功则true 反之
         // 将事件放到阻塞队列
@@ -118,6 +119,7 @@ public class NamingEventPublisher extends Thread implements ShardedEventPublishe
     }
 
     // 向订阅者发送通知的落地
+
     /** demo:
      * {@link com.alibaba.nacos.naming.core.v2.index.ClientServiceIndexesManager#onEvent} 客户端操作时间，like 注册 注销 可以看这个里
      * @param subscriber {@link Subscriber}
@@ -125,13 +127,32 @@ public class NamingEventPublisher extends Thread implements ShardedEventPublishe
      */
     @Override
     public void notifySubscriber(Subscriber subscriber, Event event) {
+
+        /**
+         * B发布事件的ThreadId 和 notifySubscriber的ThreadId-1
+         * 对不上的原因：（个人理解）
+         *    B发布事件的ThreadId 是上游来的，即NotifyCenter调用处的线程ID，
+         *    这也就解释了为什么
+         *            A发布事件的ThreadId：355
+         *            B发布事件的ThreadId：355
+         *    能够对的上
+         *    而
+         *    因为这个时候这个线程已经启动了，所以在每次通知的时候
+         *    notifySubscriber的ThreadId-1 一直是同一个线程ID
+         *
+         */
+
+        System.out.println("notifySubscriber的ThreadId-1：" + + Thread.currentThread().getId());
         if (Loggers.EVT_LOG.isDebugEnabled()) {
             Loggers.EVT_LOG.debug("[NotifyCenter] the {} will received by {}", event, subscriber);
         }
         // 打印的clz 可link到onevent的回调处
         System.out.println("subscriber 执行 onEvent: 【" + subscriber.getClass() + "】");
         // 执行订阅者们的onEvent方法，即每个订阅者对于该事件的处理逻辑
-        final Runnable job = () -> subscriber.onEvent(event);
+        final Runnable job = () -> {
+            System.out.println("notifySubscriber的ThreadId-2：" + + Thread.currentThread().getId());
+            subscriber.onEvent(event);
+        };
         // 判断当前事件是异步还是同步
         final Executor executor = subscriber.executor();
         if (executor != null) {
@@ -141,6 +162,17 @@ public class NamingEventPublisher extends Thread implements ShardedEventPublishe
             try {
                 // 同步
                 job.run();
+                /**
+                 * 下面这个验证了 上面直接调用Runnable的run方法
+                 * 并不会产生新的线程，因为使用上面的
+                 *      job.run();
+                 * 前后的线程ID一致
+                 * 但是使用  new Thread(job).start();
+                 * 线程ID不一致
+                 * 至于这里为什么要使用Runnable包装的话，并不是很理解
+                 * 直接执行也可以的，因为是同步的
+                 */
+//                new Thread(job).start();
             } catch (Throwable e) {
                 Loggers.EVT_LOG.error("Event callback exception: ", e);
             }
