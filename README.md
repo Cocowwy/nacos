@@ -1,4 +1,4 @@
-个人Nacos源码阅读笔记：  
+Nacos源码Note：  
 
 [语雀-Nacos源码解析](https://www.yuque.com/books/share/25157c70-4be0-49fc-a02f-2b5001c2b91d)  
 - 事件通知
