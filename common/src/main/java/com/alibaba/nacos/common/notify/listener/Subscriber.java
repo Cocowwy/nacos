@@ -36,7 +36,7 @@ public abstract class Subscriber<T extends Event> {
      * 源头 like {@link com.alibaba.nacos.naming.core.v2.event.publisher.NamingEventPublisher#notifySubscriber}
      *
      * 可以理解为：
-     *   事件订阅者通过实现该onEvent接口，并执行相应的逻辑，调用方使用Runnable调用
+     *   事件订阅者通过实现该onEvent接口，并执行相应的逻辑
      *
      * Event callback.
      *
@@ -53,7 +53,7 @@ public abstract class Subscriber<T extends Event> {
     public abstract Class<? extends Event> subscribeType();
     
     /**
-     * 其实现类可以来决定是同步还是异步
+     * 其子类可以来决定是同步还是异步
      * it is up to the listener to determine whether the callback is asynchronous or synchronous.
      *
      * @return {@link Executor}
