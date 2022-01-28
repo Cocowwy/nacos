@@ -25,7 +25,6 @@ import com.alibaba.nacos.naming.core.v2.pojo.Service;
  * @author xiweng.yy
  */
 public class ClientOperationEvent extends Event {
-    
     private static final long serialVersionUID = -4582413232902517619L;
     
     private final String clientId;
