@@ -13,3 +13,4 @@ Nacos源码Note：
   - [【Nacos源码篇(二)】Nacos的事件通知机制](https://blog.csdn.net/Pzzzz_wwy/article/details/122627632?spm=1001.2014.3001.5501)
   - [【Nacos源码篇(三)】NotifyCenter源码剖析](https://blog.csdn.net/Pzzzz_wwy/article/details/122675984?spm=1001.2014.3001.5501)
   - [【Nacos源码篇(四)】EventPublisher源码分析](https://blog.csdn.net/Pzzzz_wwy/article/details/122722010?spm=1001.2014.3001.5501)
+  - [【Nacos源码篇(五)】Subscriber源码分析](https://blog.csdn.net/Pzzzz_wwy/article/details/122736084?spm=1001.2014.3001.5501)
