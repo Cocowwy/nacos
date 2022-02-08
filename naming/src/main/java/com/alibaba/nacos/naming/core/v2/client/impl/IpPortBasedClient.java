@@ -29,7 +29,7 @@ import com.alibaba.nacos.naming.monitor.MetricsMonitor;
 import java.util.Collection;
 
 /**
- * Nacos naming client based ip and port.
+ * nacos naming client based ip and port.
  *
  * <p>The client is bind to the ip and port users registered. It's a abstract content to simulate the tcp session
  * client.

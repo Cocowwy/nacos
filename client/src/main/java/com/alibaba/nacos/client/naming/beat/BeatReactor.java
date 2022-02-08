@@ -164,7 +164,10 @@ public class BeatReactor implements Closeable {
         ThreadUtils.shutdownThreadPool(executorService, NAMING_LOGGER);
         NAMING_LOGGER.info("{} do shutdown stop", className);
     }
-    
+
+    /**
+     * 发送心跳信息的线程
+     */
     class BeatTask implements Runnable {
         
         BeatInfo beatInfo;
