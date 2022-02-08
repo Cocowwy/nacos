@@ -7,9 +7,11 @@ Nacos源码Note：
   - [EventPublisher源码分析](https://www.yuque.com/docs/share/108cc4c1-7faa-4299-b0c3-42ff00c57bac)
   - [Subscriber源码分析](https://www.yuque.com/docs/share/e359342c-42e2-414a-ab73-8f293f484ae9)
   - [Event源码分析](https://www.yuque.com/docs/share/b32d014c-768c-4a76-8f4b-5b1b905227f6)
+  - [消息通知总结](https://www.yuque.com/docs/share/128cc08a-a288-459e-9e60-3e36b6a5497e)
 
 [CSDN的话可以看这里](https://blog.csdn.net/pzzzz_wwy/category_11607850.html?spm=1001.2014.3001.5482)
   - [【Nacos源码篇(一)】Nacos源码本地环境搭建](https://blog.csdn.net/Pzzzz_wwy/article/details/122213765?spm=1001.2014.3001.5501)
   - [【Nacos源码篇(二)】Nacos的事件通知机制](https://blog.csdn.net/Pzzzz_wwy/article/details/122627632?spm=1001.2014.3001.5501)
   - [【Nacos源码篇(三)】NotifyCenter源码剖析](https://blog.csdn.net/Pzzzz_wwy/article/details/122675984?spm=1001.2014.3001.5501)
   - [【Nacos源码篇(四)】EventPublisher源码分析](https://blog.csdn.net/Pzzzz_wwy/article/details/122722010?spm=1001.2014.3001.5501)
+  - [【Nacos源码篇(五)】Subscriber源码分析](https://blog.csdn.net/Pzzzz_wwy/article/details/122736084?spm=1001.2014.3001.5501)
