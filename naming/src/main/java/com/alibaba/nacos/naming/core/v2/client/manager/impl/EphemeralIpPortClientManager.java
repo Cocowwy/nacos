@@ -47,7 +47,8 @@ import java.util.concurrent.TimeUnit;
  */
 @Component("ephemeralIpPortClientManager")
 public class EphemeralIpPortClientManager implements ClientManager {
-    
+
+    // 保存的是客户端 key  IP#true 可以理解为一个非持久化的客户端
     private final ConcurrentMap<String, IpPortBasedClient> clients = new ConcurrentHashMap<>();
     
     private final DistroMapper distroMapper;

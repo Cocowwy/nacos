@@ -17,6 +17,7 @@
 package com.alibaba.nacos.naming.healthcheck.heartbeat;
 
 /**
+ * 检查和更新临时实例的状态，如果它们已过期则将其删除。
  * Check and update statues of ephemeral instances, remove them if they have been expired.
  *
  * @author xiweng.yy
