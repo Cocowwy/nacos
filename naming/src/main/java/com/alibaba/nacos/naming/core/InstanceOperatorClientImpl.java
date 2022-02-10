@@ -99,6 +99,7 @@ public class InstanceOperatorClientImpl implements InstanceOperator {
     public void registerInstance(String namespaceId, String serviceName, Instance instance) {
         boolean ephemeral = instance.isEphemeral();
         String clientId = IpPortBasedClient.getClientId(instance.toInetAddr(), ephemeral);
+        // todo 这里面可以看到心跳相关
         createIpPortClientIfAbsent(clientId);
         Service service = getService(namespaceId, serviceName, ephemeral);
         clientOperationService.registerInstance(service, instance, clientId);
