@@ -29,6 +29,7 @@ import com.alibaba.nacos.sys.utils.ApplicationUtils;
 import java.util.Collection;
 
 /**
+ * 2.x 版服务的客户端节拍检查任务
  * Client beat check task of service for version 2.x.
  *
  * @author nkorange

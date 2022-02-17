@@ -95,6 +95,7 @@ public class BeatReactor implements Closeable {
      */
     public void addBeatInfo(String serviceName, BeatInfo beatInfo) {
         NAMING_LOGGER.info("[BEAT] adding beat: {} to beat map.", beatInfo);
+        // 心跳 key  serviceName#192.168.0.6#8080
         String key = buildKey(serviceName, beatInfo.getIp(), beatInfo.getPort());
         BeatInfo existBeat;
         //fix #1733
@@ -102,6 +103,7 @@ public class BeatReactor implements Closeable {
             existBeat.setStopped(true);
         }
         dom2Beat.put(key, beatInfo);
+        // 添加细心跳任务
         executorService.schedule(new BeatTask(beatInfo), beatInfo.getPeriod(), TimeUnit.MILLISECONDS);
         MetricsMonitor.getDom2BeatSizeMonitor().set(dom2Beat.size());
     }
@@ -181,8 +183,10 @@ public class BeatReactor implements Closeable {
             if (beatInfo.isStopped()) {
                 return;
             }
+            // 心跳的间隔时间
             long nextTime = beatInfo.getPeriod();
             try {
+                // 发送心跳
                 JsonNode result = serverProxy.sendBeat(beatInfo, BeatReactor.this.lightBeatEnabled);
                 long interval = result.get(CLIENT_BEAT_INTERVAL_FIELD).asLong();
                 boolean lightBeatEnabled = false;
@@ -197,6 +201,7 @@ public class BeatReactor implements Closeable {
                 if (result.has(CommonParams.CODE)) {
                     code = result.get(CommonParams.CODE).asInt();
                 }
+                // 未找到请求的资源 则会重试注册
                 if (code == NamingResponseCode.RESOURCE_NOT_FOUND) {
                     Instance instance = new Instance();
                     instance.setPort(beatInfo.getPort());
@@ -221,6 +226,10 @@ public class BeatReactor implements Closeable {
                 NAMING_LOGGER.error("[CLIENT-BEAT] failed to send beat: {}, unknown exception msg: {}",
                         JacksonUtils.toJson(beatInfo), unknownEx.getMessage(), unknownEx);
             } finally {
+
+                // 再次提交一个检测心跳的线程任务 ！ 时间为 nextTime = period
+                // 因为每次都是使用的一个新的线程  通过beatInfo的volatile(保证线程可见)修饰的stopped
+                // 来判断心跳是否需要终止
                 executorService.schedule(new BeatTask(beatInfo), nextTime, TimeUnit.MILLISECONDS);
             }
         }

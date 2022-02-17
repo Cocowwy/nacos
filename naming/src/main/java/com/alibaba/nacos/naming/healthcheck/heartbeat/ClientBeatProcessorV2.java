@@ -28,6 +28,7 @@ import com.alibaba.nacos.naming.misc.Loggers;
 import com.alibaba.nacos.naming.misc.UtilsAndCommons;
 
 /**
+ * 用于更新 v2.x 客户端节拍触发的临时实例的线程。
  * Thread to update ephemeral instance triggered by client beat for v2.x.
  *
  * @author nkorange
@@ -57,10 +58,12 @@ public class ClientBeatProcessorV2 implements BeatProcessor {
         String groupName = NamingUtils.getGroupName(rsInfo.getServiceName());
         Service service = Service.newService(namespace, groupName, serviceName, rsInfo.isEphemeral());
         HealthCheckInstancePublishInfo instance = (HealthCheckInstancePublishInfo) client.getInstancePublishInfo(service);
+        // 根据之前保存的IP和端口 校验一下还对不对
         if (instance.getIp().equals(ip) && instance.getPort() == port) {
             if (Loggers.EVT_LOG.isDebugEnabled()) {
                 Loggers.EVT_LOG.debug("[CLIENT-BEAT] refresh beat: {}", rsInfo);
             }
+            // 设置实例最后一次的心跳检测的时间，并且将状态设置成为健康
             instance.setLastHeartBeatTime(System.currentTimeMillis());
             if (!instance.isHealthy()) {
                 instance.setHealthy(true);

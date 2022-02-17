@@ -28,6 +28,7 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * 健康检查反应堆
  * Health check reactor.
  *
  * @author nacos
@@ -91,6 +92,7 @@ public class HealthCheckReactor {
     }
     
     /**
+     * 立即安排客户端节拍检查任务
      * Schedule client beat check task without a delay.
      *
      * @param task health check task

@@ -106,6 +106,7 @@ public class Service implements Serializable {
             return false;
         }
         Service service = (Service) o;
+        // 注意这里的equals是没有算上版本号的~
         return namespace.equals(service.namespace) && group.equals(service.group) && name.equals(service.name);
     }
     

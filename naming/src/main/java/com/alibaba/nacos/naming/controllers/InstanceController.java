@@ -371,6 +371,7 @@ public class InstanceController {
     }
     
     /**
+     * 客户端上报心跳信息的地方
      * Create a beat for instance.
      *
      * @param request http request

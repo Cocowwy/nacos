@@ -215,6 +215,7 @@ public class Instance implements Serializable {
     }
     
     public long getInstanceHeartBeatInterval() {
+//        TimeUnit.SECONDS.toMillis(5); 默认5s
         return getMetaDataByKeyWithDefault(PreservedMetadataKeys.HEART_BEAT_INTERVAL,
                 Constants.DEFAULT_HEART_BEAT_INTERVAL);
     }

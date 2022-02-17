@@ -58,6 +58,7 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
+ * 2.x
  * Instance service.
  *
  * @author xiweng.yy
@@ -216,6 +217,7 @@ public class InstanceOperatorClientImpl implements InstanceOperator {
             RsInfo clientBeat, BeatInfoInstanceBuilder builder) throws NacosException {
         Service service = getService(namespaceId, serviceName, true);
         String clientId = IpPortBasedClient.getClientId(ip + InternetAddressUtil.IP_PORT_SPLITER + port, true);
+        //拿到客户端的信息
         IpPortBasedClient client = (IpPortBasedClient) clientManager.getClient(clientId);
         if (null == client || !client.getAllPublishedService().contains(service)) {
             if (null == clientBeat) {
@@ -237,6 +239,7 @@ public class InstanceOperatorClientImpl implements InstanceOperator {
             clientBeat.setServiceName(serviceName);
         }
         ClientBeatProcessorV2 beatProcessor = new ClientBeatProcessorV2(namespaceId, clientBeat, client);
+        // 异步
         HealthCheckReactor.scheduleNow(beatProcessor);
         client.setLastUpdatedTime();
         return NamingResponseCode.OK;

@@ -284,6 +284,7 @@ public class NamingHttpClientProxy extends AbstractNamingClientProxy {
     }
     
     /**
+     * 发送心跳  和注册实例都是在一个class里面
      * Send beat.
      *
      * @param beatInfo         beat info
@@ -298,7 +299,7 @@ public class NamingHttpClientProxy extends AbstractNamingClientProxy {
         }
         Map<String, String> params = new HashMap<String, String>(16);
         Map<String, String> bodyMap = new HashMap<String, String>(2);
-        if (!lightBeatEnabled) {
+        if (!lightBeatEnabled) { // true
             bodyMap.put("beat", JacksonUtils.toJson(beatInfo));
         }
         params.put(CommonParams.NAMESPACE_ID, namespaceId);
@@ -306,7 +307,7 @@ public class NamingHttpClientProxy extends AbstractNamingClientProxy {
         params.put(CommonParams.CLUSTER_NAME, beatInfo.getCluster());
         params.put(IP_PARAM, beatInfo.getIp());
         params.put(PORT_PARAM, String.valueOf(beatInfo.getPort()));
-//      /nacos/v1/ns/instance/beat
+        // /nacos/v1/ns/instance/beat   -- PUT请求
         String result = reqApi(UtilAndComs.nacosUrlBase + "/instance/beat", params, bodyMap, HttpMethod.PUT);
         return JacksonUtils.toObj(result);
     }
