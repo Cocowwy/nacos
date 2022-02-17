@@ -8,6 +8,8 @@ Nacos源码Note：
   - [Subscriber源码分析](https://www.yuque.com/docs/share/e359342c-42e2-414a-ab73-8f293f484ae9)
   - [Event源码分析](https://www.yuque.com/docs/share/b32d014c-768c-4a76-8f4b-5b1b905227f6)
   - [消息通知总结](https://www.yuque.com/docs/share/128cc08a-a288-459e-9e60-3e36b6a5497e)
+- 挑几个核心的东西过过整体流程
+  - [扣一扣服务注册的流程](https://www.yuque.com/docs/share/e5ba6635-396a-4ed6-868d-f18d1004a386)
 
 [CSDN的话可以看这里](https://blog.csdn.net/pzzzz_wwy/category_11607850.html?spm=1001.2014.3001.5482)
   - [【Nacos源码篇(一)】Nacos源码本地环境搭建](https://blog.csdn.net/Pzzzz_wwy/article/details/122213765?spm=1001.2014.3001.5501)
