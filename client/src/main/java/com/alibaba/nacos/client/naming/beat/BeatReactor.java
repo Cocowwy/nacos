@@ -66,11 +66,14 @@ public class BeatReactor implements Closeable {
     
     public BeatReactor(NamingHttpClientProxy serverProxy, Properties properties) {
         this.serverProxy = serverProxy;
+        // 获取合适的线程数 ， 对于一个客户端而言，1个线程就够了
         int threadCount = initClientBeatThreadCount(properties);
         this.executorService = new ScheduledThreadPoolExecutor(threadCount, new ThreadFactory() {
+            // ThreadFactory 设置的这个线程为守护线程，意味着该线程不出意外是会一直伴随着实例
             @Override
             public Thread newThread(Runnable r) {
                 Thread thread = new Thread(r);
+                // 设置为守护线程，在没有用户线程可服务时会自动离开
                 thread.setDaemon(true);
                 thread.setName("com.alibaba.nacos.naming.beat.sender");
                 return thread;

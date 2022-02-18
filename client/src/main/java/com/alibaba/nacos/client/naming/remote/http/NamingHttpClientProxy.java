@@ -299,7 +299,7 @@ public class NamingHttpClientProxy extends AbstractNamingClientProxy {
         }
         Map<String, String> params = new HashMap<String, String>(16);
         Map<String, String> bodyMap = new HashMap<String, String>(2);
-        if (!lightBeatEnabled) { // true
+        if (!lightBeatEnabled) { // lightBeatEnabled = false
             bodyMap.put("beat", JacksonUtils.toJson(beatInfo));
         }
         params.put(CommonParams.NAMESPACE_ID, namespaceId);

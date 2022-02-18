@@ -101,6 +101,7 @@ public final class ThreadUtils {
     }
     
     /**
+     * 通过核数，计算出合适的线程数
      * Through the number of cores, calculate the appropriate number of threads.
      *
      * @param threadMultiple multiple time of cores
