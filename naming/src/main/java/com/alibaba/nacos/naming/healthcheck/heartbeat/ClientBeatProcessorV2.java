@@ -57,8 +57,9 @@ public class ClientBeatProcessorV2 implements BeatProcessor {
         String serviceName = NamingUtils.getServiceName(rsInfo.getServiceName());
         String groupName = NamingUtils.getGroupName(rsInfo.getServiceName());
         Service service = Service.newService(namespace, groupName, serviceName, rsInfo.isEphemeral());
+        // TODO 这里是拿到了客户端之后，再获取客户端实例的详细信息  publishers 这个 map里面 有点小疑问
         HealthCheckInstancePublishInfo instance = (HealthCheckInstancePublishInfo) client.getInstancePublishInfo(service);
-        // 根据之前保存的IP和端口 校验一下还对不对
+        // 根据之前保存的IP和端口 校验一下还对不对 按道理来说不存在不对的情况吧
         if (instance.getIp().equals(ip) && instance.getPort() == port) {
             if (Loggers.EVT_LOG.isDebugEnabled()) {
                 Loggers.EVT_LOG.debug("[CLIENT-BEAT] refresh beat: {}", rsInfo);

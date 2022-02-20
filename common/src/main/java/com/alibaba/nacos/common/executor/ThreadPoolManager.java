@@ -31,6 +31,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * // TODO Access Metric.
+ *  //  TODO 待看
+ *
+ * 线程池管理器 单例！！
  *
  * <p>For unified management of thread pool resources, the consumer can simply call the register method to {@link
  * ThreadPoolManager#register(String, String, ExecutorService)} the thread pool that needs to be included in the life

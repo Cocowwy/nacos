@@ -239,7 +239,7 @@ public class InstanceOperatorClientImpl implements InstanceOperator {
             clientBeat.setServiceName(serviceName);
         }
         ClientBeatProcessorV2 beatProcessor = new ClientBeatProcessorV2(namespaceId, clientBeat, client);
-        // 异步
+        // 异步 立即执行
         HealthCheckReactor.scheduleNow(beatProcessor);
         client.setLastUpdatedTime();
         return NamingResponseCode.OK;

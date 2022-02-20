@@ -36,7 +36,17 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author xiweng.yy
  */
 public abstract class AbstractClient implements Client {
-    
+
+    /**
+     *  instance1 (server1) ->   server1-->instance1 info
+     *  instance2 (server1) ->   server1-->instance1 info
+     *
+     *  instance1 (server1) ->   server1-->instance1 info
+     *  instance2 (server2) ->   server2-->instance2 info
+     *
+     */
+    // todo  站在客户端的维度，客户端对于服务而言是1对1关系，那么这个map值不是恒定为1的吗
+    // 分别拿两个同server的instance 和 两个不同server的instance 这里的值恒为1  这个map初始为1会不会更好？
     protected final ConcurrentHashMap<Service, InstancePublishInfo> publishers = new ConcurrentHashMap<>(16, 0.75f, 1);
     
     protected final ConcurrentHashMap<Service, Subscriber> subscribers = new ConcurrentHashMap<>(16, 0.75f, 1);
