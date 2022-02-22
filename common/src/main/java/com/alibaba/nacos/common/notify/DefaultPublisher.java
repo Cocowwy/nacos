@@ -67,6 +67,7 @@ public class DefaultPublisher extends Thread implements EventPublisher {
         this.eventType = type;
         this.queueMaxSize = bufferSize;
         this.queue = new ArrayBlockingQueue<>(bufferSize);
+//        this.setDaemon(true); how use? TODO
         start();
     }
 
