@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
+ * 本地灾难恢复目录工具
  * Local Disaster Recovery Directory Tool.
  *
  * @author Nacos
@@ -66,7 +67,8 @@ public class LocalConfigInfoProcessor {
                         + File.separator + "config";
         LOGGER.info("LOCAL_SNAPSHOT_PATH:{}", LOCAL_SNAPSHOT_PATH);
     }
-    
+
+    // 获取故障转移
     public static String getFailover(String serverName, String dataId, String group, String tenant) {
         File localPath = getFailoverFile(serverName, dataId, group, tenant);
         if (!localPath.exists() || !localPath.isFile()) {

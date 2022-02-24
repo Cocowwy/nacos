@@ -580,6 +580,7 @@ public class ClientWorker implements Closeable {
         private long lastAllSyncTime = System.currentTimeMillis();
         
         /**
+         * 5 分钟检查所有监听缓存键
          * 5 minutes to check all listen cache keys.
          */
         private static final long ALL_SYNC_INTERNAL = 5 * 60 * 1000L;

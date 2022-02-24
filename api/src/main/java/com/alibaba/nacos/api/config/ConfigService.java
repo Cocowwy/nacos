@@ -38,6 +38,7 @@ public interface ConfigService {
     String getConfig(String dataId, String group, long timeoutMs) throws NacosException;
     
     /**
+     * 获取配置并注册监听器
      * Get config and register Listener.
      *
      * <p>If you want to pull it yourself when the program starts to get the configuration for the first time, and the

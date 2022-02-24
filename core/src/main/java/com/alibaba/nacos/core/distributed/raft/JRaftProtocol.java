@@ -48,6 +48,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
+ * CP协议的具体实现：JRaft。
  * A concrete implementation of CP protocol: JRaft.
  *
  * <pre>

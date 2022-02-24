@@ -38,6 +38,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
+ * 一致性协议管理，负责管理 Nacos 中一致性协议的生命周期
  * Conformance protocol management, responsible for managing the lifecycle of conformance protocols in Nacos.
  *
  * @author <a href="mailto:liaochuntao@live.com">liaochuntao</a>
